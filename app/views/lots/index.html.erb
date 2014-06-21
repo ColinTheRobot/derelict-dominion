@@ -48,7 +48,7 @@
     for (var i = 0; i < lots.length; i++) {
       var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
       var lotAddress = lots[i].address;
-      var contentString = lotAddress;
+      // var contentString = lotAddress;
       addMarker(map, lotLocation, lotAddress, contentString);
       // addInfoWindow(contentString);
     } //end for loop
