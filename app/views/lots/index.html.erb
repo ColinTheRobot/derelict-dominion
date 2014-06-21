@@ -5,65 +5,66 @@
       body { height: 100%; margin: 0; padding: 0 }
       #map-canvas { height: 60% }
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=#{API_KEY}">
-    </script>
-    <script type="text/javascript">
-    (function() {
-      var lots = [];
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=#{API_KEY}">
+</script>
+<script type="text/javascript">
+(function() {
+  var lots = [];
 
-      <% @lots.each do |lot| %>
-        lots.push({latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= '#{lot.address}' %>", zipcode: <%= lot.zipcode %>});
-      <% end %>
+  <% @lots.each do |lot| %>
+    lots.push({latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= '#{lot.address}' %>"});
+  <% end %>
 
-        function initialize() {
-          var mapOptions = {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            zoom: 8
-          };
-          var map = new google.maps.Map(document.getElementById("map-canvas"),
-              mapOptions);
-        }
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
-
+    function initialize() {
+      var mapOptions = {
+        center: new google.maps.LatLng(-34.397, 150.644),
+        zoom: 8
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"),
+          mapOptions);
+    }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
         }
 
-        function showPosition(position) {
-          console.log(position)
-            // x.innerHTML="Latitude: " + position.coords.latitude +
-            // "<br>Longitude: " + position.coords.longitude;
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            console.log(latitude);
-            initialize(latitude, longitude);
-        }
+    }
+
+    function showPosition(position) {
+      console.log(position)
+        // x.innerHTML="Latitude: " + position.coords.latitude +
+        // "<br>Longitude: " + position.coords.longitude;
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude);
+        initialize(latitude, longitude);
+    }
 
 
-      function initialize(latitude, longitude) {
-        console.log(longitude);
-        var myLatlng = new google.maps.LatLng(latitude,longitude)
-        var mapOptions = {
-          center: new google.maps.LatLng(latitude,longitude),
-          zoom: 18
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
+  function initialize(latitude, longitude) {
+    console.log(longitude);
+    var myLatlng = new google.maps.LatLng(latitude,longitude)
+    var mapOptions = {
+      center: new google.maps.LatLng(latitude,longitude),
+      zoom: 18
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
 
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Hello World!'
-         });
-      }
-      google.maps.event.addDomListener(window, 'load', getLocation);
-      })();
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+     });
+  }
+  google.maps.event.addDomListener(window, 'load', getLocation);
 
-    </script>
+})(); //end wrapper
+
+</script>
   </head>
   <body>
     <div id="map-canvas"/>
