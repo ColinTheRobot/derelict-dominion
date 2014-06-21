@@ -44,20 +44,36 @@
     var map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
 
+
     for (var i = 0; i < lots.length; i++) {
       var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
       var lotAddress = lots[i].address;
-      addMarker(map, lotLocation, lotAddress);
+      var contentString = lotAddress;
+      addMarker(map, lotLocation, lotAddress, contentString);
+      // addInfoWindow(contentString);
     } //end for loop
 
-    function addMarker(map, location, title){
-      console.log("location: " + location);
+    function addMarker(map, location, title, contentString){
+      // console.log("location: " + location);
       var marker = new google.maps.Marker({
         position: location,
         map: map,
-        title: title
-      })
+        title: title,
+        clickable: true
+      });
+      var lotInfoWindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        lotInfoWindow.open(map,marker);
+      });
     }
+
+    // function addInfoWindow(contentString){
+    //   var lotInfoWindow = new google.maps.InfoWindow({
+    //     content: contentString
+    //   });
+    // }
   }
   google.maps.event.addDomListener(window, 'load', getLocation);
 
