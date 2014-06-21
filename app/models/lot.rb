@@ -11,5 +11,12 @@ class Lot < ActiveRecord::Base
   has_attached_file :photo3, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :photo3, :content_type => /\Aimage\/.*\Z/
 
-  
+  def self.get_zipcode(latitude, longitude)
+    Geocoder.search("#{latitude},#{longitude}").first.data['address_components'].last['long_name']
+  end
+
+  def self.get_address(latitude, longitude)
+    Geocoder.search("#{latitude},#{longitude}").first.data['formatted_address']
+  end
+
 end

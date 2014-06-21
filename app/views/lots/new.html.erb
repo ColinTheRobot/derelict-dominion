@@ -1,0 +1,22 @@
+<%= binding.pry %>
+<%= form_for :lot, url: lots_path do |f| %>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <%= f.label :borough %>
+    <%= f.text_field :borough %>
+    <%= f.label :zipcode %>
+    <%= f.text_field :zipcode %>
+    <%= f.label :agency_owner %>
+    <%= f.text_field :agency_owner %>
+    <%= f.label :area_sq_feet %>
+    <%= f.text_field :area_sq_feet %>
+    <%= f.label :area_acres %>
+    <%= f.text_field :area_acres %>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <%= f.hidden_field :latitude, id: 'hidden_lat' %>
+    <%= f.hidden_field :longitude, id: 'hidden_long' %>
+    <%= f.submit 'Report lot or building' %>
+<% end %>
+
+

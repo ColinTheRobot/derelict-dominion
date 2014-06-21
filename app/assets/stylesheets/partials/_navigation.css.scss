@@ -1,0 +1,38 @@
+/* Navigation
+================================================== */
+
+nav {}
+
+.global-nav {
+   @extend .cf;
+   clear: left;
+   margin-right: $padding;
+   padding: $padding 0;
+   background-color: $gray-lightest;
+   @include breakpoint(baby-bear){
+      margin-right: $padding - 10;
+   }
+   li {
+      float: left;
+      margin-right: $padding;
+   }
+   a {
+      font-size: 1.2em;
+      padding: $padding;
+      background-color: $gray-lightest;
+      @include transition(background, 0.3s, ease-out);
+      &:hover {
+         background-color: $gray-lighter;
+      }
+   }
+}
+
+.local-nav {}
+
+.inline-nav {}
+
+.contextual-nav {}
+
+.faceted-nav {}
+
+.supplemental-nav {}

@@ -21,6 +21,7 @@ group :production do
   gem 'rails_12factor', '~> 0.0.2'
 end
 
+gem 'geocoder'
 gem 'devise', '~> 3.2.4'
 gem 'paperclip', '~> 4.1.1'
 gem 'rmagick', '~> 2.13.2'

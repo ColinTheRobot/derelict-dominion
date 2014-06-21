@@ -4,15 +4,21 @@ development:
   encoding: unicode
   database: derelict_dominion_development
   pool: 5
+  port: 5432
+  host: 127.0.0.1
 
 test:
   adapter: postgresql
   encoding: unicode
   database: derelict_dominion_test
   pool: 5
+  port: 5432
+  host: 127.0.0.1
 
 production:
   adapter: postgresql
   encoding: unicode
   database: derelict_dominion_production
   pool: 5
+  port: 5432
+  host: 127.0.0.1
