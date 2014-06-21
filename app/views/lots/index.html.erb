@@ -50,19 +50,11 @@
     </script>
   </head>
   <body>
-
+ <section class="map">
     <div id="map-canvas"/>
-
-      <%= form_for :lot, url: lots_path do |f| %>
-          <%= f.text_field :latitude, id: 'hidden_lat' %>
-          <%= f.text_field :longitude, id: 'hidden_long' %>
-          <%= f.submit 'Report lot/building' %>
-      <% end %>
-
-
-    <section class="map">
-      <div id="map-canvas"/>
-    </section>
+    </div>
+  </section>
+      <%= link_to "Report dereliction", new_lot_path %>
 
 
   </body>
