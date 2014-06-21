@@ -1,22 +1,32 @@
 /* Buttons
 ================================================== */
 
+input[type="submit"] {
+   border: none;
+}
+
 .btn {
    display: inline-block;
+   font-family: $sans-serif-extra-bold;
+   text-transform: uppercase;
+   border-radius: 5px;
+   background-color: $link-color;
+   @include transition(background, 0.3s, ease);
+   &:hover {
+      background-color: lighten($link-color, 20);
+   }
 }
 
 .btn-primary {
-   background-color: $link-color;
-   padding: $padding 40px;
+   color: #fff;
+   padding: $padding 20px;
 }
 
 .btn-secondary {
-   background-color: $gray-dark;
    padding: 10px $padding;
 }
 
 .btn-tertiary {
-   background-color: $gray-light;
    padding: $padding;
 }
 

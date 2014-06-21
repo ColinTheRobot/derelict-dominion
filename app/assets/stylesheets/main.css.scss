@@ -29,23 +29,44 @@
    //Navigation
    @import 'partials/navigation';
 
-/* Base
+/* Site
 ================================================== */
+
 .page {
    max-width: 1200px;
    margin: 0 auto;
+   background-color: $white;
+}
+
+.site-header {
+   border-bottom: 1px solid $gray-lighter;
+   h1 {
+      line-height: 1;
+   }
 }
 
 .map {
    border: 1px solid #c3c3c3;
    height: 500px;
+   margin-bottom: $padding;
+   @include breakpoint(baby-bear){
+      height: 400px;
+   }
 }
 
-/* Header
-================================================== */
+/* ---------------------------------------------- Report Building Form */
 
-/* Site
-================================================== */
-
-/* Footer
-================================================== */
+.report-building-form {
+   label {
+      font-family: $sans-serif-bold;
+   }
+   input {
+      margin-bottom: $padding;
+   }
+   input[type="text"] {
+      width: 50%;
+      @include breakpoint(baby-bear){
+         width: 100%;
+      }
+   }
+}

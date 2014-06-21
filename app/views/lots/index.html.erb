@@ -83,9 +83,17 @@
 </head>
 
 <body>
- <section class="map">
-    <div id="map-canvas"/>
+  
+  <section class="map">
+    <div id="map-canvas"/></div>
+  </section>
+  
+  <section class="content">
+    <div class="row">
+      <div class="grid-full">
+        <%= link_to "Report dereliction", new_lot_path, class: "btn btn-primary" %>
+      </div>
     </div>
   </section>
-    <%= link_to "Report dereliction", new_lot_path %>
+
 </body>
