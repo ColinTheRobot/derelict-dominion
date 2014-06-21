@@ -37,5 +37,4 @@ class LotsController < ApplicationController
   def destroy
 
   end
-
 end

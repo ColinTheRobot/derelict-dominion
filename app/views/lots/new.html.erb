@@ -1,8 +1,10 @@
 <section class="content">
     <div class="row">
         <div class="grid-full">
-            <%= form_for :lot, url: lots_path do |f| %>
+            <%= form_for :lot, url: lots_path, :html => { :multipart => true } do |f| %>
                 <div class="report-building-form">
+                  <%= f.file_field :photo1 %>
+
                     <%= f.label :address %>
                     <%= f.text_field :address %>
                     <%= f.label :borough %>
