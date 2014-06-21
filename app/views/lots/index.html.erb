@@ -13,7 +13,7 @@
   var lots = [];
 
   <% @lots.each do |lot| %>
-    lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>" });
+    lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>", id: <%= lot.id %> });
   <% end %>
 
   function getLocation() {
@@ -48,13 +48,12 @@
     for (var i = 0; i < lots.length; i++) {
       var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
       var lotAddress = lots[i].address;
-      // var contentString = lotAddress;
+      var lotID = "<a href='/lots/'" + lots[i].id.toString();
+      var contentString = lotAddress + lotID + "> More Details</a>";
       addMarker(map, lotLocation, lotAddress, contentString);
-      // addInfoWindow(contentString);
     } //end for loop
 
     function addMarker(map, location, title, contentString){
-      // console.log("location: " + location);
       var marker = new google.maps.Marker({
         position: location,
         map: map,
@@ -68,13 +67,8 @@
         lotInfoWindow.open(map,marker);
       });
     }
-
-    // function addInfoWindow(contentString){
-    //   var lotInfoWindow = new google.maps.InfoWindow({
-    //     content: contentString
-    //   });
-    // }
   }
+
   google.maps.event.addDomListener(window, 'load', getLocation);
 
 })(); //end wrapper
@@ -83,16 +77,24 @@
 </head>
 
 <body>
-  
+
   <section class="map">
     <div id="map-canvas"/></div>
   </section>
-  
+
   <section class="content">
     <div class="row">
       <div class="grid-full">
         <%= link_to "Report dereliction", new_lot_path, class: "btn btn-primary" %>
       </div>
+    <% @lots.each do |lot| %>
+      <ul>
+        <li><%= link_to lot.address, lot %></li>
+        <% if lot.borough != nil %>
+        <li><%= lot.borough %></li>
+        <% end %>
+      </ul>
+    <% end %>
     </div>
   </section>
 
