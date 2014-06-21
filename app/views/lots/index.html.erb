@@ -79,23 +79,30 @@
 <body>
 
   <section class="map">
-    <div id="map-canvas"/></div>
+    <div id="map-canvas"></div>
   </section>
 
   <section class="content">
     <div class="row">
       <div class="grid-full">
+        
         <%= link_to "Report dereliction", new_lot_path, class: "btn btn-primary" %>
+        
+        <div class="derelict-housing">
+          <% @lots.each do |lot| %>
+            <ul id="derelict-housing-list" class="derelict-housing-list">
+              <li class="hideme"><%= link_to lot.address, lot %></li>
+              <% if lot.borough != nil %>
+              <li class="hideme"><%= lot.borough %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+
       </div>
-    <% @lots.each do |lot| %>
-      <ul>
-        <li><%= link_to lot.address, lot %></li>
-        <% if lot.borough != nil %>
-        <li><%= lot.borough %></li>
-        <% end %>
-      </ul>
-    <% end %>
+      <!-- /.grid-full -->
     </div>
+    <!-- /.row -->
   </section>
 
 </body>

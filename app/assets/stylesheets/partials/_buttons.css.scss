@@ -5,7 +5,12 @@ input[type="submit"] {
    border: none;
 }
 
+a {
+   @include transition(color, 0.3s, ease);
+}
+
 .btn {
+   color: #fff;
    display: inline-block;
    font-family: $sans-serif-extra-bold;
    text-transform: uppercase;
@@ -18,7 +23,6 @@ input[type="submit"] {
 }
 
 .btn-primary {
-   color: #fff;
    padding: $padding 20px;
 }
 

@@ -41,7 +41,14 @@
 .site-header {
    border-bottom: 1px solid $gray-lighter;
    h1 {
+      float: left;
       line-height: 1;
+      a {
+         color: $gray-darker;
+         &:hover {
+            color: $gray-light;
+         }
+      }
    }
 }
 
@@ -50,8 +57,30 @@
    height: 500px;
    margin-bottom: $padding;
    @include breakpoint(baby-bear){
-      height: 400px;
+      height: 350px;
    }
+}
+
+.devise-shit {
+   float: right;
+}
+
+/* ---------------------------------------------- Derelict Houssing List - Index Page */
+
+.derelict-housing {
+   padding-top: $padding;
+}
+
+.derelict-housing-list {
+   font-size: 1.4em;
+   margin-top: $padding;
+   display: block;
+   width: 25%;
+   float: left;
+   a {
+      font-family: $sans-serif-extra-bold;
+   }
+
 }
 
 /* ---------------------------------------------- Report Building Form */
