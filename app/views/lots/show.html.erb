@@ -1,5 +1,7 @@
 <%= @lot.address %> | <%= @lot.borough %>
 
-<% if @lot.photo1 != nil %>
-  <div><img src="<%= @lot.photo1 %>"></div>
+<div><img src="<%= @lot.photo1 %>"></div>
+
+<% if @lot.description != nil %>
+  <div><%= @lot.description %></div>
 <% end %>
