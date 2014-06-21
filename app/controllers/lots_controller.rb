@@ -1,36 +1,41 @@
 class LotsController < ApplicationController
+  def index
+    @lots = Lot.all
+  end
 
-def index
-  @lots = Lot.all
-end
+  def show
 
-def show
+  end
 
-end
+  def edit
 
-def edit
+  end
 
-end
+  def new
+    @lot = Lot.new
+  end
 
-def new
-  @lot = Lot.new
-end
+  def create
+   @lot = Lot.new
+   coordinates = Lot.get_coordinates(params["lot"]["address"])
+   if @lot.save
+      @lot.update(
+        address: params["lot"]["address"],
+        borough: params["lot"]["borough"],
+        zipcode: params["lot"]["zipcode"],
+        agency_owner: params["lot"]["agency_owner"],
+        area_sq_feet: params["lot"]["area_sq_feet"],
+        area_acres: params["lot"]["area_acres"],
+        latitude: coordinates[0],
+        longitude: coordinates[1],
+        description: params["lot"]["description"]
+      )
+    end
+    redirect_to root_path
+  end
 
-def create
-  @lot = Lot.create lot_params
-  redirect_to root_path
-end
+  def destroy
 
-def destroy
-
-end
-
-private
-
-def lot_params
-  params.require(:lot).permit(:address, :borough, :zipcode, :agency_owner, :area_sq_feet, :area_acres, :latitude, :longitude, :description, :is_vacant)
-end
-
-
+  end
 
 end
