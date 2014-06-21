@@ -18,6 +18,7 @@ end
 
 def create
   @lot = Lot.create lot_params
+  redirect_to root_path
 end
 
 def destroy

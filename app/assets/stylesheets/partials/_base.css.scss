@@ -4,7 +4,10 @@
 body {
    font-size: 16px;
    font-family: $sans-serif;
-   @include breakpoint(baby-bear){}
+   background-color: $gray-lightest;
+   @include breakpoint(baby-bear){
+      font-size: 14px;
+   }
 }
 
 ul {
