@@ -60,6 +60,20 @@
    }
 }
 
+/* ---------------------------------------------- Derelict Houssing List - Index Page */
+
+.derelict-housing {
+   padding-top: $padding;
+}
+
+.derelict-housing-list {
+   font-size: 1.4em;
+   margin-top: $padding;
+   a {
+      font-family: $sans-serif-extra-bold;
+   }
+}
+
 /* ---------------------------------------------- Report Building Form */
 
 .report-building-form {
