@@ -1,6 +1,6 @@
 class LotsController < ApplicationController
 
-def index 
+def index
   @lots = Lot.all
 end
 
@@ -13,20 +13,23 @@ def edit
 end
 
 def new
-
+  @lot = Lot.new
 end
 
-def create 
-
-end
-
-def update
-
+def create
+  @lot = Lot.create lot_params
 end
 
 def destroy
 
 end
+
+private
+
+def lot_params
+  params.require(:lot).permit(:address, :borough, :zipcode, :agency_owner, :area_sq_feet, :area_acres, :latitude, :longitude, :description, :is_vacant)
+end
+
 
 
 end
