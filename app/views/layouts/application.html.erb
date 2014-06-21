@@ -17,7 +17,7 @@
             <p><%=current_user.email%></p>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'logout-button'  %>
               <%else%>
-              <%= link_to "Login", new_user_session_path, :class => 'login-button' %>
+              <%= link_to "Login", new_user_session_path, :class => 'btn btn-secondary login-button' %>
               <%end%>
          </div>
       </div>

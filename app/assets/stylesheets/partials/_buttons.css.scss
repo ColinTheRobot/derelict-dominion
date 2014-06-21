@@ -10,6 +10,7 @@ a {
 }
 
 .btn {
+   color: #fff;
    display: inline-block;
    font-family: $sans-serif-extra-bold;
    text-transform: uppercase;
@@ -22,7 +23,6 @@ a {
 }
 
 .btn-primary {
-   color: #fff;
    padding: $padding 20px;
 }
 
