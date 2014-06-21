@@ -41,6 +41,7 @@
 .site-header {
    border-bottom: 1px solid $gray-lighter;
    h1 {
+      float: left;
       line-height: 1;
       a {
          color: $gray-darker;
@@ -58,6 +59,10 @@
    @include breakpoint(baby-bear){
       height: 350px;
    }
+}
+
+.devise-shit {
+   float: right;
 }
 
 /* ---------------------------------------------- Derelict Houssing List - Index Page */
