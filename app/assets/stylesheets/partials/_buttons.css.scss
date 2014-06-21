@@ -5,6 +5,10 @@ input[type="submit"] {
    border: none;
 }
 
+a {
+   @include transition(color, 0.3s, ease);
+}
+
 .btn {
    display: inline-block;
    font-family: $sans-serif-extra-bold;

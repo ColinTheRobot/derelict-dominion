@@ -42,6 +42,12 @@
    border-bottom: 1px solid $gray-lighter;
    h1 {
       line-height: 1;
+      a {
+         color: $gray-darker;
+         &:hover {
+            color: $gray-light;
+         }
+      }
    }
 }
 
@@ -50,7 +56,7 @@
    height: 500px;
    margin-bottom: $padding;
    @include breakpoint(baby-bear){
-      height: 400px;
+      height: 350px;
    }
 }
 
