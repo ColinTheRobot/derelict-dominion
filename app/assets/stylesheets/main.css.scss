@@ -77,6 +77,9 @@
    display: block;
    width: 25%;
    float: left;
+   @include breakpoint(baby-bear) {
+      width: 100%;
+   }
    a {
       font-family: $sans-serif-extra-bold;
    }
