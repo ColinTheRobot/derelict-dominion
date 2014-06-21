@@ -5,7 +5,7 @@ def index
 end
 
 def show
-
+  @lot = Lot.find params[:id]
 end
 
 def edit
@@ -28,7 +28,7 @@ end
 private
 
 def lot_params
-  params.require(:lot).permit(:address, :borough, :zipcode, :agency_owner, :area_sq_feet, :area_acres, :latitude, :longitude, :description, :is_vacant)
+  params.require(:lot).permit(:address, :borough, :zipcode, :agency_owner, :area_sq_feet, :area_acres, :latitude, :longitude, :description, :is_vacant, :photo1)
 end
 
 
