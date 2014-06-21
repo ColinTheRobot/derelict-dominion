@@ -13,6 +13,12 @@
       <div class="row">
          <div class="grid-full">
             <h1>Derelict Dominion</h1>
+            <% if current_user %>
+            <p><%=current_user.email%></p>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'logout-button'  %>
+              <%else%>
+              <%= link_to "Login", new_user_session_path, :class => 'login-button' %>
+              <%end%>
          </div>
       </div>
    </header>
