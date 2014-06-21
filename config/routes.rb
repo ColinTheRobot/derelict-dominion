@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "pages#index"
+  root to: "lots#index"
   devise_for :users
   resources :users
   resources :lots

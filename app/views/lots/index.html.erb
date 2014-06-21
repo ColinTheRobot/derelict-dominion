@@ -1,16 +1,31 @@
-<!DOCTYPE html>
-<html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> -->
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #map-canvas { height: 100% }
     </style>
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=API_KEY">
+      src="https://maps.googleapis.com/maps/api/js?key={API_KEY}">
     </script>
     <script type="text/javascript">
+    $(document).ready(function() {
+      var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML="Latitude: " + position.coords.latitude + 
+            "<br>Longitude: " + position.coords.longitude;  
+        }
+      });
+
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng(-34.397, 150.644),
@@ -25,4 +40,3 @@
   <body>
     <div id="map-canvas"/>
   </body>
-</html>
