@@ -50,6 +50,7 @@
     </script>
   </head>
   <body>
+
     <div id="map-canvas"/>
 
       <%= form_for :lot, url: lots_path do |f| %>
@@ -57,5 +58,11 @@
           <%= f.text_field :longitude, id: 'hidden_long' %>
           <%= f.submit 'Report lot/building' %>
       <% end %>
+
+
+    <section class="map">
+      <div id="map-canvas"/>
+    </section>
+
 
   </body>
