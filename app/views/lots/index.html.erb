@@ -13,7 +13,7 @@
   var lots = [];
 
   <% @lots.each do |lot| %>
-    lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>" });
+    lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>", id: "<%= lot.id.to_s %>" });
   <% end %>
 
   function getLocation() {
@@ -48,7 +48,8 @@
     for (var i = 0; i < lots.length; i++) {
       var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
       var lotAddress = lots[i].address;
-      var contentString = lotAddress;
+      var lotID = "<a href='/lots'" + lots[i].id;
+      var contentString = lotAddress + lotID + "> More Details</a>";
       addMarker(map, lotLocation, lotAddress, contentString);
       // addInfoWindow(contentString);
     } //end for loop
@@ -68,13 +69,8 @@
         lotInfoWindow.open(map,marker);
       });
     }
-
-    // function addInfoWindow(contentString){
-    //   var lotInfoWindow = new google.maps.InfoWindow({
-    //     content: contentString
-    //   });
-    // }
   }
+
   google.maps.event.addDomListener(window, 'load', getLocation);
 
 })(); //end wrapper
