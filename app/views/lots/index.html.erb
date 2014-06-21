@@ -11,7 +11,7 @@
 <script type="text/javascript">
 (function() {
   var lots = [];
-
+  console.log("<%=@lots%>");
   <% @lots.each do |lot| %>
     lots.push({latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= '#{lot.address}' %>"});
   <% end %>
@@ -30,22 +30,18 @@
         } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
-
     }
 
     function showPosition(position) {
-      console.log(position)
         // x.innerHTML="Latitude: " + position.coords.latitude +
         // "<br>Longitude: " + position.coords.longitude;
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        console.log(latitude);
         initialize(latitude, longitude);
     }
 
 
   function initialize(latitude, longitude) {
-    console.log(longitude);
     var myLatlng = new google.maps.LatLng(latitude,longitude)
     var mapOptions = {
       center: new google.maps.LatLng(latitude,longitude),
@@ -53,7 +49,6 @@
     };
     var map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
-
     var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
