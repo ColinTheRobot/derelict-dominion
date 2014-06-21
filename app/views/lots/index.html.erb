@@ -1,76 +1,75 @@
-  <head>
+<head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 60% }
+      #map-canvas { height: 100% }
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=#{API_KEY}">
-    </script>
-    <script type="text/javascript">
-    (function() {
-      var lots = [];
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=#{API_KEY}">
+</script>
+<script type="text/javascript">
+(function() {
+  var lots = [];
 
-      <% @lots.each do |lot| %>
-        lots.push({latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= '#{lot.address}' %>", zipcode: <%= lot.zipcode %>});
-      <% end %>
+  <% @lots.each do |lot| %>
+    lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>" });
+  <% end %>
 
-        function initialize() {
-          var mapOptions = {
-            center: new google.maps.LatLng(-34.397, 150.644),
-            zoom: 8
-          };
-          var map = new google.maps.Map(document.getElementById("map-canvas"),
-              mapOptions);
-        }
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
-            }
+  function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
 
-        }
+  function showPosition(position) {
+    console.log(position)
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    console.log(latitude);
+    initialize(latitude, longitude);
+  }
 
-        function showPosition(position) {
-          console.log(position)
-            // x.innerHTML="Latitude: " + position.coords.latitude +
-            // "<br>Longitude: " + position.coords.longitude;
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            console.log(latitude);
-            initialize(latitude, longitude);
-        }
+  function initialize(latitude, longitude) {
+    // console.log(longitude);
+    // var myLatlng = new google.maps.LatLng(latitude,longitude);
 
+    var mapOptions = {
+      center: new google.maps.LatLng(latitude,longitude),
+      zoom: 16
+    };
 
-      function initialize(latitude, longitude) {
-        console.log(longitude);
-        var myLatlng = new google.maps.LatLng(latitude,longitude)
-        var mapOptions = {
-          center: new google.maps.LatLng(latitude,longitude),
-          zoom: 18
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+        mapOptions);
 
-        var marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: 'Hello World!'
-         });
-      }
-      google.maps.event.addDomListener(window, 'load', getLocation);
-      })();
+    for (var i = 0; i < lots.length; i++) {
+      var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
+      var lotAddress = lots[i].address;
+      addMarker(map, lotLocation, lotAddress);
+    } //end for loop
 
-    </script>
-  </head>
-  <body>
+    function addMarker(map, location, title){
+      console.log("location: " + location);
+      var marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: title
+      })
+    }
+  }
+  google.maps.event.addDomListener(window, 'load', getLocation);
+
+})(); //end wrapper
+
+</script>
+</head>
+
+<body>
  <section class="map">
     <div id="map-canvas"/>
     </div>
   </section>
-      <%= link_to "Report dereliction", new_lot_path %>
-
-
-  </body>
+    <%= link_to "Report dereliction", new_lot_path %>
+</body>
