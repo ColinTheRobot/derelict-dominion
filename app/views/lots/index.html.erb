@@ -15,62 +15,6 @@
   <% @lots.each do |lot| %>
     lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>", id: <%= lot.id %> });
   <% end %>
-
-  function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-  }
-
-  function showPosition(position) {
-    console.log(position)
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
-    console.log(latitude);
-    initialize(latitude, longitude);
-  }
-
-  function initialize(latitude, longitude) {
-    // console.log(longitude);
-    // var myLatlng = new google.maps.LatLng(latitude,longitude);
-
-    var mapOptions = {
-      center: new google.maps.LatLng(latitude,longitude),
-      zoom: 16
-    };
-
-    var map = new google.maps.Map(document.getElementById("map-canvas"),
-        mapOptions);
-
-
-    for (var i = 0; i < lots.length; i++) {
-      var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
-      var lotAddress = lots[i].address;
-      var lotID = "<a href='/lots/'" + lots[i].id.toString();
-      var contentString = lotAddress + lotID + "> More Details</a>";
-      addMarker(map, lotLocation, lotAddress, contentString);
-    } //end for loop
-
-    function addMarker(map, location, title, contentString){
-      var marker = new google.maps.Marker({
-        position: location,
-        map: map,
-        title: title,
-        clickable: true
-      });
-      var lotInfoWindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-      google.maps.event.addListener(marker, 'click', function() {
-        lotInfoWindow.open(map,marker);
-      });
-    }
-  }
-
-  google.maps.event.addDomListener(window, 'load', getLocation);
-
 })(); //end wrapper
 
 </script>
@@ -85,9 +29,9 @@
   <section class="content">
     <div class="row">
       <div class="grid-full">
-        
+
         <%= link_to "Report dereliction", new_lot_path, class: "btn btn-primary" %>
-        
+
         <div class="derelict-housing">
           <% @lots.each do |lot| %>
             <ul id="derelict-housing-list" class="derelict-housing-list">
