@@ -1,7 +1,6 @@
 (function() {
   window.onload = getLocation;
-
-  var lots = [];
+  var map;
 
   function getLocation() {
     console.log('getLocation');
@@ -23,16 +22,13 @@
 
   function initialize(latitude, longitude) {
     console.log('initialize');
-
     var mapOptions = {
       center: new google.maps.LatLng(latitude,longitude),
       zoom: 16
     };
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-    var map = new google.maps.map(document.getElementById("map-canvas"),
-        mapOptions);
-
-    requestData();
+    requestData(map);
   }
 
   function requestData() {
@@ -41,31 +37,40 @@
       url: '/lots',
       dataType: 'json'
     }).done(function(data){
-      console.log(data);
-    })
+      parseData(data);
+    });
   }
 
-    // for (var i = 0; i < lots.length; i++) {
-    //   var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
-    //   var lotAddress = lots[i].address;
-    //   var lotID = "<a href='/lots/'" + lots[i].id.toString();
-    //   var contentString = lotAddress + lotID + "> More Details</a>";
-    //   addMarker(map, lotLocation, lotAddress, contentString);
-    // } //end for loop
+  function parseData(data) {
+    console.log(data);
+    for (var i = 0; i < data.length; i++) {
+      var contentString;
+      var lotLocation = new google.maps.LatLng(data[i].longitude,data[i].latitude);
+      var lotAddress = data[i].address;
+      var lotID = "<a href='/lots/'" + data[i].id;
+      var contentString = lotAddress + lotID + "> More Details</a>" + "this is the id: " + data[i].id;
+    addMarker(map, lotLocation, lotAddress, contentString);
+    } //end for loop
+  }
 
     function addMarker(map, location, title, contentString){
-    console.log('addMarker');
       var marker = new google.maps.Marker({
         position: location,
         map: map,
         title: title,
         clickable: true
       });
-      var lotInfoWindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-      google.maps.event.addListener(marker, 'click', function() {
-        lotInfoWindow.open(map,marker);
-      });
-    }
+
+      google.maps.event.addListener(marker, 'click', getDataCallback(map, contentString));
+
+      function getDataCallback(map, contentString) {
+        var lotInfoWindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        return function() {
+          lotInfoWindow.setContent(contentString);
+          lotInfoWindow.open(map, this);
+        } //end return function
+      } // end dataCallback
+    } //end addMarker
 })(); //end wrapper
