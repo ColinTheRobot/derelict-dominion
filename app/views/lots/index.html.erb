@@ -8,16 +8,6 @@
 <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=#{API_KEY}">
 </script>
-<script type="text/javascript">
-(function() {
-  var lots = [];
-
-  <% @lots.each do |lot| %>
-    lots.push({ latitude: <%= lot.latitude %>, longitude: <%= lot.longitude %>, address: "<%= lot.address.to_s %>", id: <%= lot.id %> });
-  <% end %>
-})(); //end wrapper
-
-</script>
 </head>
 
 <body>

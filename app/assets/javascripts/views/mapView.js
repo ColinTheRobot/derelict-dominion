@@ -1,8 +1,8 @@
 var MapView = Backbone.View.extend({
   el: 'window',
-  // tagName: '#map-canvas',
 
   initialize: function() {
+    this.$el.empty();
     this.latitude;
     this.longitude;
     this.mapOptions;
@@ -14,52 +14,70 @@ var MapView = Backbone.View.extend({
   getLocation: function() {
     console.log('im getLocation');
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+      self = this;
+      console.log('getLocation this is self ' + self);
+        navigator.geolocation.getCurrentPosition(this.showPosition);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
-    // google.maps.event.addDomListener(window, 'load', getLocation);
-    function showPosition(position){
-    console.log("this is position: " + position);
+  },
+
+  showPosition: function(position){
     this.latitude = position.coords.latitude;
     this.longitude = position.coords.longitude;
-    console.log("im lat: " + this.latitude + " im lon: " + this.longitude);
-    }
-      this.displayMap(this.latitude, this.longitude);
-  },
+    console.log("showPosition - im lat: " + this.latitude + " im lon: " + this.longitude);
+    self.displayMap(this.latitude, this.longitude);
+    },
 
   displayMap: function(latitude, longitude) {
     console.log("hey im displayMap, im lat: " + latitude + " im lon: " + longitude);
-
     var mapOptions = {
       center: new google.maps.LatLng(latitude, longitude),
       zoom: 16
     };
-    console.log(mapOptions);
-    var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    console.log(map);
-
-    // for (var i = 0; i < lots.length; i++) {
-    //   var lotLocation = new google.maps.LatLng(lots[i].longitude,lots[i].latitude);
-    //   var lotAddress = lots[i].address;
-    //   var lotID = "<a href='/lots/'" + lots[i].id.toString();
-    //   var contentString = lotAddress + lotID + "> More Details</a>";
-      // addMarker(map, lotLocation, lotAddress, contentString);
-    // }
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    this.requestData();
   },
 
-  addMarker: function(map, location, title, contentString) {
+  requestData: function() {
+    $.ajax({
+      type: 'get',
+      url: '/lots',
+      dataType: 'json'
+    }).done(function(data){
+      self.parseData(data);
+    });
+  },
+
+  parseData: function(data) {
+    for (var i = 0; i < data.length; i++) {
+      var contentString;
+      var lotLocation = new google.maps.LatLng(data[i].longitude,data[i].latitude);
+      var lotAddress = data[i].address;
+      var lotID = "<a href='/lots/'" + data[i].id;
+      var contentString = lotAddress + lotID + "> More Details</a>" + "this is the id: " + data[i].id;
+    this.addMarker(map, lotLocation, lotAddress, contentString);
+    } //end for loop
+  },
+
+  addMarker: function(map, location, title, contentString){
     var marker = new google.maps.Marker({
       position: location,
       map: map,
       title: title,
       clickable: true
     });
-    var lotInfoWindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    google.maps.event.addListener(marker, 'click', function() {
-      lotInfoWindow.open(map,marker);
-    })
-  }
+
+    google.maps.event.addListener(marker, 'click', getDataCallback(map, contentString));
+
+    function getDataCallback(map, contentString) {
+      var lotInfoWindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      return function() {
+        lotInfoWindow.setContent(contentString);
+        lotInfoWindow.open(map, this);
+      } //end return function
+    } // end dataCallback
+  } //end addMarker
 });
