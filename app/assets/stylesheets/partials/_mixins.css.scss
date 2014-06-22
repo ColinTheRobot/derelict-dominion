@@ -26,6 +26,9 @@
   @if $point == baby-bear {
     @media (max-width: 55em) { @content; }
   }
+  @if $point == infant-bear {
+    @media (max-width: 35em) { @content; }
+  }
   @if $point == reverso-baby-bear {
     @media (min-width: 55em) { @content; }
   }
