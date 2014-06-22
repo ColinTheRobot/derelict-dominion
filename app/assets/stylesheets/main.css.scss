@@ -43,6 +43,10 @@
    h1 {
       float: left;
       line-height: 1;
+      @include breakpoint(baby-bear){
+         float: none;
+         margin-top: 0;
+      }
       a {
          color: $gray-darker;
          &:hover {
@@ -63,6 +67,9 @@
 
 .devise-shit {
    float: right;
+   @include breakpoint (baby-bear){
+      float: none;
+   }
 }
 
 /* ---------------------------------------------- Derelict Houssing List - Index Page */
