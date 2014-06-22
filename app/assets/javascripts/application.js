@@ -12,7 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require underscore
 //= require backbone
-//= require turbolinks
 //= require_tree .
+
+$().ready(function() {
+  console.log('loaded bro');
+});
