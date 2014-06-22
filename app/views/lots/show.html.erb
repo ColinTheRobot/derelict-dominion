@@ -1,7 +1,12 @@
-<%= @lot.address %> | <%= @lot.borough %>
+<section class="content">
+   <div class="row">
+      <div class="grid-full">
+         <p><%= @lot.address %> | <%= @lot.borough %></p>
+         <div><img src="<%= @lot.photo1 %>"></div>
 
-<div><img src="<%= @lot.photo1 %>"></div>
-
-<% if @lot.description != nil %>
-  <div><%= @lot.description %></div>
-<% end %>
+         <% if @lot.description != nil %>
+           <div><%= @lot.description %></div>
+         <% end %>
+      </div>
+   </div>
+</section>
