@@ -12,7 +12,6 @@ var MapView = Backbone.View.extend({
   },
 
   getLocation: function() {
-    console.log('im getLocation');
     if (navigator.geolocation) {
       self = this;
       console.log('getLocation this is self ' + self);
@@ -25,15 +24,13 @@ var MapView = Backbone.View.extend({
   showPosition: function(position){
     this.latitude = position.coords.latitude;
     this.longitude = position.coords.longitude;
-    console.log("showPosition - im lat: " + this.latitude + " im lon: " + this.longitude);
     self.displayMap(this.latitude, this.longitude);
     },
 
   displayMap: function(latitude, longitude) {
-    console.log("hey im displayMap, im lat: " + latitude + " im lon: " + longitude);
     var mapOptions = {
       center: new google.maps.LatLng(latitude, longitude),
-      zoom: 16
+      zoom: 15
     };
     map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
     this.requestData();
