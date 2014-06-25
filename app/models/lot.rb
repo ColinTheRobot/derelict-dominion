@@ -14,6 +14,8 @@ class Lot < ActiveRecord::Base
       :default_url => "http://placeimg.com/500/500/arch"
   validates_attachment_content_type :photo1, :content_type => /\Aimage\/.*\Z/
 
+  validates :address, :borough, presence: true
+
   def s3_credentials
     {:bucket => ENV['BUCKET'], :access_key_id => ENV['AWS_ACCESS_KEY_ID'], :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']}
   end
