@@ -1,6 +1,10 @@
 class LotsController < ApplicationController
   def index
     @lots = Lot.all
+    respond_to do |format|
+      format.html
+      format.json { render :json => @lots }
+    end
   end
 
   def show
